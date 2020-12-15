@@ -3,11 +3,14 @@ using MarsQA_1.SpecflowPages.Helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using RelevantCodes.ExtentReports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using static MarsQA_1.Helpers.CommonMethods;
 
 namespace MarsQA_1.SpecflowPages.Pages
 {
@@ -67,6 +70,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Choose degree
             WaitHelpers.WaitForElementVisibility(Driver.driver, "Name", "degree", 10000);
             Degree.SendKeys(ExcelLibHelper.ReadData(2, "Degree"));
+            Thread.Sleep(1000);
         }
        
 
@@ -76,18 +80,23 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Click on add education
             WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//input[@value='Add']", 10000);
             AddEdu.Click();
-            //CommonMethods.test.Log(LogStatus.Info, "Education Added successfully");
+            
         }
 
         internal void VerifyEducation()
         {
             //Populate excel data
             ExcelLibHelper.PopulateInCollection(ConstantHelpers.ExcelPath, "Profile");
-            // Refresh the page
-            Driver.driver.Navigate().Refresh();
+            //// Refresh the page
+            //Driver.driver.Navigate().Refresh();
             //verify education
             try
             {
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Add Education");
+
                 //Jump to Education tab
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[3]", 10000);
                 EducationBtn.Click();
@@ -116,12 +125,13 @@ namespace MarsQA_1.SpecflowPages.Pages
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]", 10000);
                 var lastRowEducationGraduationYear = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[5]")).Text;
                 Assert.That(lastRowEducationGraduationYear, Is.EqualTo(ExcelLibHelper.ReadData(2, "YearOfGraduation")));
-                //CommonMethods.test.Log(LogStatus.Pass, "Education added verified successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Education Added Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "EducationAdded");
             }
             catch (Exception ex)
             {
-                Assert.Fail("Test failed to verify Entering Education", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Education added is not verified successfully");
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", ex.Message);
+
             }
 
         }
@@ -152,6 +162,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             WaitHelpers.WaitForElementVisibility(Driver.driver, "Name", "title", 10000);
             SelectTitle.Click();
             new SelectElement(SelectTitle).SelectByText(ExcelLibHelper.ReadData(3, "Title"));
+            Thread.Sleep(1000);
         }
 
         internal void UpdateEducation()
@@ -160,7 +171,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody/tr/td/div[3]/input[1]", 10000);
 
             UpdateEduBtn.Click();
-            //CommonMethods.test.Log(LogStatus.Info, "Education edited successfully");
+           
         }
 
         internal void VerifyEditedEducation()
@@ -174,6 +185,11 @@ namespace MarsQA_1.SpecflowPages.Pages
             //verify updated education
             try
             {
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Updated Education");
+
                 //Jump to Education tab
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[3]", 10000);
                 EducationBtn.Click();
@@ -182,12 +198,13 @@ namespace MarsQA_1.SpecflowPages.Pages
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]", 10000);
                 var lastRowEducationTitle = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[3]")).Text;
                 Assert.That(lastRowEducationTitle, Is.EqualTo(ExcelLibHelper.ReadData(3, "Title")));
-                //CommonMethods.test.Log(LogStatus.Pass, "Education edited verified successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Education Updated Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "EducationUpdated");
             }
             catch (Exception ex)
             {
-                Assert.Fail("Test failed to verify Updating Education", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Education edited is not verified successfully");
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", ex.Message);
+
             }
         }
         #endregion
@@ -200,6 +217,11 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Delete Education
             try
             {
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Delete Education");
+
                 //Click on education
                 //Click on Education button
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[3]", 10000);
@@ -212,14 +234,14 @@ namespace MarsQA_1.SpecflowPages.Pages
                 //Click on  delete education button
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[6]/span[2]/i", 20000);
                 DeleteEduBtn.Click();
-                //CommonMethods.test.Log(LogStatus.Pass, "Education deleted successfully");
-
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Education Deleted Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "EducationDeleted");
 
             }
             catch (Exception ex)
             {
-                Assert.Fail("Test failed to delete Education", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Education is not deleted successfully");
+
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", ex.Message);
             }
         }
         #endregion

@@ -9,13 +9,13 @@ Scenario: Add Certification
 	Then User should able to add new Certification successfully
 
 
-Scenario: Update Skill
+Scenario: Update Certification
 	Given User try to edit the Certification record
 	When  User click on update Certification button
 	Then User should able to edit Certification successfully
 
 
 
-Scenario: Delete Language
+Scenario: Delete Certification
 	 Given  User should able to Delete Certification sucessfully
      

@@ -43,16 +43,17 @@ namespace MarsQA_1.Helpers
         //ExtentReports
         #region reports
         public static ExtentTest test;
-        public static ExtentReports Extent;
+        public static ExtentReports extent;
 
 
 
         public static void ExtentReports()
         {
-            Extent = new ExtentReports(ConstantHelpers.ReportsPath, true, DisplayOrder.NewestFirst);
-            Extent.LoadConfig(ConstantHelpers.ReportXMLPath);
-            //Create Extent Report
-            test = Extent.StartTest("Login Test");
+           
+            extent = new ExtentReports(ConstantHelpers.ReportsPath, true, DisplayOrder.NewestFirst);
+            extent.LoadConfig(ConstantHelpers.ReportXMLPath);
+           
+
         }
         #endregion
 

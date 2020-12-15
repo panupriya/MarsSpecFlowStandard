@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using RelevantCodes.ExtentReports;
 using System;
 using System.Threading;
+using static MarsQA_1.Helpers.CommonMethods;
 
 namespace MarsQA_1.Pages
 {
@@ -14,6 +15,7 @@ namespace MarsQA_1.Pages
         private static IWebElement Email => Driver.driver.FindElement(By.XPath("(//INPUT[@type='text'])[2]"));
         private static IWebElement Password => Driver.driver.FindElement(By.XPath("//INPUT[@type='password']"));
         private static IWebElement LoginBtn => Driver.driver.FindElement(By.XPath("//BUTTON[@class='fluid ui teal button'][text()='Login']"));
+        #region SignIn
         public static void SigninStep()
         {
             Driver.NavigateUrl();
@@ -24,6 +26,11 @@ namespace MarsQA_1.Pages
 
             try
             {
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("SignIn to Mars");
+
                 WaitHelpers.WaitForElement(Driver.driver, "XPath", "//*[contains(text(),'Ishaan Sandeep')]", 10000);
                 // check login is successfull
                 var loginCheck = "test";
@@ -32,18 +39,22 @@ namespace MarsQA_1.Pages
                 if (loginCheck == "Ishaan Sandeep")
                 {
                     CommonMethods.test.Log(LogStatus.Pass, "Login Passed");
+                    SaveScreenShotClass.SaveScreenshot(Driver.driver, "Login Passed");
+                    Assert.IsTrue(true);
                 }
                 else 
                 {
                     CommonMethods.test.Log(LogStatus.Fail, "Login failed");
                 }
             }
-            catch 
+            catch (Exception e)
             {
-                Console.WriteLine("Test failed at login step");
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
+               
 
             }
         }
-        
+        #endregion
+
     }
 }

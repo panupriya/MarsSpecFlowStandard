@@ -29,19 +29,19 @@ namespace MarsQA_1.SpecflowPages.Pages
             ExcelLibHelper.PopulateInCollection(ConstantHelpers.ExcelPath, "Profile");
 
             #region Availability
+           
+                //Click on availability edit
+                WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[2]/div/div/div/div/div/div[3]/div/div[2]/div/span/i", 10000);
+                AvailabilityTimeEdit.Click();
 
-            //Click on availability edit
-            WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[2]/div/div/div/div/div/div[3]/div/div[2]/div/span/i", 10000);
-            AvailabilityTimeEdit.Click();
+                //Click on availability dropdown
+                AvailabilityTime.Click();
 
-            //Click on availability dropdown
-            AvailabilityTime.Click();
-
-            WaitHelpers.WaitForElementVisibility(Driver.driver, "Name", "availabiltyType", 10000);
-            //select availability time
-            new SelectElement(AvailabilityTime).SelectByText(ExcelLibHelper.ReadData(2, "AvailableTime"));
-            //CommonMethods.test.Log(LogStatus.Info, "Select the available time");
-            
+                WaitHelpers.WaitForElementVisibility(Driver.driver, "Name", "availabiltyType", 10000);
+                //select availability time
+                new SelectElement(AvailabilityTime).SelectByText(ExcelLibHelper.ReadData(2, "AvailableTime"));
+                CommonMethods.test.Log(LogStatus.Info, "Select the available time");
+           
             #endregion
 
             #region Hour
@@ -56,7 +56,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             WaitHelpers.WaitForElementVisibility(Driver.driver, "Name", "availabiltyHour", 10000);
             //select availability hour
             new SelectElement(AvailabilityHour).SelectByText(ExcelLibHelper.ReadData(2, "Hours"));
-            //CommonMethods.test.Log(LogStatus.Info, "Added hour successfully");
+            CommonMethods.test.Log(LogStatus.Info, "Added hour successfully");
 
             #endregion
 
@@ -71,7 +71,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             WaitHelpers.WaitForElementVisibility(Driver.driver, "Name", "availabiltyTarget", 10000);
             //select salary
             new SelectElement(SalarySelect).SelectByText(ExcelLibHelper.ReadData(2, "EarnTarget"));
-            //CommonMethods.test.Log(LogStatus.Info, "Added Target successfully");
+            CommonMethods.test.Log(LogStatus.Info, "Added Target successfully");
             Thread.Sleep(1000);
             #endregion
 

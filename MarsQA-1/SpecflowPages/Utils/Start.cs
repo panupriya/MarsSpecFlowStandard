@@ -23,25 +23,25 @@ namespace MarsQA_1.Utils
             //Populate excel data
             ExcelLibHelper.PopulateInCollection(ConstantHelpers.ExcelPath, "SignIn");
             //call the SignIn class
-            SignIn.SigninStep();
+             SignIn.SigninStep();
         }
 
         [AfterScenario]
         public void TearDown()
         {
-
+            Thread.Sleep(500);
             //Screenshot
             string img = SaveScreenShotClass.SaveScreenshot(Driver.driver, "Report");
-            //test.Log(LogStatus.Info, "Snapshot below: " + test.AddScreenCapture(img));
+            test.Log(LogStatus.Info, "Snapshot below: " + test.AddScreenCapture(img));
+
+
+            // end test. (Reports)
+            CommonMethods.extent.EndTest(CommonMethods.test);
+
+            // calling Flush writes everything to the log file (Reports)
+            CommonMethods.extent.Flush();
             //Close the browser
             Close();
-             
-            //// end test. (Reports)
-            //CommonMethods.Extent.EndTest(test);
-            
-            //// calling Flush writes everything to the log file (Reports)
-            //CommonMethods.Extent.Flush();
-           
 
         }
     }

@@ -3,11 +3,14 @@ using MarsQA_1.SpecflowPages.Helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using RelevantCodes.ExtentReports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using static MarsQA_1.Helpers.CommonMethods;
 
 namespace MarsQA_1.SpecflowPages.Pages
 {
@@ -61,7 +64,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             WaitHelpers.WaitForElementVisibility(Driver.driver, "Name", "certificationYear", 10000);
             CertiYear.Click();
             new SelectElement(CertiYear).SelectByText(ExcelLibHelper.ReadData(2, "YearOfCertification")); ;
-
+            Thread.Sleep(1000);
         }
 
         internal void AddNewCertification()
@@ -69,7 +72,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Click on add certification
             WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//input[@value='Add']", 10000);
             AddCerBtn.Click();
-            //CommonMethods.test.Log(LogStatus.Info, "Added Certification successfully");
+            
         }
 
         internal void VerifyCertification()
@@ -82,7 +85,10 @@ namespace MarsQA_1.SpecflowPages.Pages
             //verify certification
             try
             {
-
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Add Certification");
                 //Jump to Certification tab
 
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[4]", 10000);
@@ -102,12 +108,12 @@ namespace MarsQA_1.SpecflowPages.Pages
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]", 10000);
                 var lastRowCertificateYear = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]")).Text;
                 Assert.That(lastRowCertificateYear, Is.EqualTo(ExcelLibHelper.ReadData(2, "YearOfCertification")));
-                //CommonMethods.test.Log(LogStatus.Pass, "Added Certification verified successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Certification Added Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "CertificationAdded");
             }
             catch (Exception ex)
             {
-                Assert.Fail("Test failed to verify Entering Certification", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Added Certification is not verified successfully");
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", ex.Message);
             }
 
         }
@@ -138,7 +144,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             WaitHelpers.WaitForElementVisibility(Driver.driver, "Name", "certificationYear", 10000);
             CertiYear.Click();
             new SelectElement(CertiYear).SelectByText(ExcelLibHelper.ReadData(3, "YearOfCertification")); ;
-
+            Thread.Sleep(1000);
         }
 
         internal void UpdateCertification()
@@ -147,7 +153,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Click on update certification button            
             WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[1]/tr/td/div/span/input[1]", 10000);
             UpdateCertiBtn.Click();
-            //CommonMethods.test.Log(LogStatus.Info, "Certification edited successfully");
+            
         }
 
         internal void VerifyEditedCertification()
@@ -161,6 +167,12 @@ namespace MarsQA_1.SpecflowPages.Pages
             try
             {
 
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Update Certification");
+
+
                 //Jump to Certification tab
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[4]", 10000);
                 CertificationBtn.Click();
@@ -169,12 +181,12 @@ namespace MarsQA_1.SpecflowPages.Pages
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]", 10000);
                 var lastRowCertificateYear = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[3]")).Text;
                 Assert.That(lastRowCertificateYear, Is.EqualTo(ExcelLibHelper.ReadData(3, "YearOfCertification")));
-                //CommonMethods.test.Log(LogStatus.Pass, "Certification edited verified successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Certification Updated Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "CertificationUpdated");
             }
             catch (Exception ex)
             {
-                Assert.Fail("Test failed to verify Entering Certification", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Certification edited is not verified successfully");
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", ex.Message);
             }
 
 
@@ -191,9 +203,13 @@ namespace MarsQA_1.SpecflowPages.Pages
 
             try
             {
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Delete Certification");
                 //Click on certification
                 //Click on Certifications
-               WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[4]", 10000);
+                WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[4]", 10000);
                 CertificationBtn.Click();
 
                 //Click on certification to be deleted
@@ -203,14 +219,14 @@ namespace MarsQA_1.SpecflowPages.Pages
                 //Click on delete certification button
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[last()]/tr/td[4]/span[2]", 20000);
                 DeleteCertiBtn.Click();
-               //CommonMethods.test.Log(LogStatus.Pass, "Certification deleted successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Certification Deleted Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "CertificationDeleted");
 
             }
 
             catch (Exception ex)
             {
-                Assert.Fail("Test failed to delete Certification", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Pass, "Certification is not deleted successfully");
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", ex.Message);
             }
         }
         #endregion

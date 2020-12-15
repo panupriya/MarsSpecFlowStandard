@@ -9,13 +9,13 @@ Scenario: Add Education
 	Then User should able to add new education successfully
 
 
-Scenario: Update Skill
+Scenario: Update Education
 	Given User try to edit the Education record
 	When  User click on update Education button
 	Then User should able to edit education successfully
 
 
 
-Scenario: Delete Language
+Scenario: Delete Education
 	 Given  User should able to Delete Education sucessfully
      

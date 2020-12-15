@@ -3,11 +3,14 @@ using MarsQA_1.SpecflowPages.Helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using RelevantCodes.ExtentReports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using static MarsQA_1.Helpers.CommonMethods;
 
 namespace MarsQA_1.SpecflowPages.Pages
 {
@@ -47,6 +50,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Select language level
             ChooseLevel.Click();
             new SelectElement(ChooseLevel).SelectByText(ExcelLibHelper.ReadData(2, "LanguageLevel"));
+            Thread.Sleep(1000);
         }
 
         internal void AddLanguage()
@@ -55,18 +59,23 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Add Language
             WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//input[@value='Add']", 10000);
             AddLang.Click();
-            //CommonMethods.test.Log(LogStatus.Info, "Added Language successfully");
+            
         }
 
         internal void VerifyLanguage()
         {
             //Populate excel data
             ExcelLibHelper.PopulateInCollection(ConstantHelpers.ExcelPath, "Profile");
-            // Refresh the page
-            Driver.driver.Navigate().Refresh();
+           
             //verify language
             try
             {
+
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Add Language");
+
                 //Verify Language Name
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]", 10000);
                 LangBtn.Click();
@@ -78,12 +87,14 @@ namespace MarsQA_1.SpecflowPages.Pages
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
                 var lastRowLanguageLevel = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
                 Assert.That(lastRowLanguageLevel, Is.EqualTo(ExcelLibHelper.ReadData(2, "LanguageLevel")));
-                //CommonMethods.test.Log(LogStatus.Pass, "Added Language verified successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Language Added Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "LanguageAdded");
             }
             catch (Exception ex)
             {
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
                 Assert.Fail("Test failed to verify Entering Language", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Added Language is not verified successfully");
+                
             }
         }
         #endregion
@@ -95,6 +106,8 @@ namespace MarsQA_1.SpecflowPages.Pages
             ExcelLibHelper.PopulateInCollection(ConstantHelpers.ExcelPath, "Profile");
             // Refresh the page
             Driver.driver.Navigate().Refresh();
+
+
             //Click on language
             WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]", 10000);
             LangBtn.Click();
@@ -113,6 +126,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             ChooseLevel.Click();
 
             new SelectElement(ChooseLevel).SelectByText(ExcelLibHelper.ReadData(3, "LanguageLevel"));
+            Thread.Sleep(1000);
 
            
         }
@@ -129,24 +143,32 @@ namespace MarsQA_1.SpecflowPages.Pages
         {
             //Populate excel data
             ExcelLibHelper.PopulateInCollection(ConstantHelpers.ExcelPath, "Profile");
-            // Refresh the page
-            Driver.driver.Navigate().Refresh();
+            //// Refresh the page
+            //Driver.driver.Navigate().Refresh();
 
             //verify updated language
             try
             {
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Updated a Language");
+
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]", 10000);
                 LangBtn.Click();
                 //Verify Language Level
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
                 var lastRowLanguageLevel = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
+                
                 Assert.That(lastRowLanguageLevel, Is.EqualTo(ExcelLibHelper.ReadData(3, "LanguageLevel")));
-                //CommonMethods.test.Log(LogStatus.Pass, "Language edited verified successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Uddated a Language Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "LanguageUpdated");
             }
             catch (Exception ex)
             {
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
                 Assert.Fail("Test failed to update Language", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Language edited is not verified successfully");
+                
             }
         }
 
@@ -159,6 +181,11 @@ namespace MarsQA_1.SpecflowPages.Pages
             ExcelLibHelper.PopulateInCollection(ConstantHelpers.ExcelPath, "Profile");
             try
             {
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Delete Language");
+
                 //Click on language
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]", 10000);
                 LangBtn.Click();
@@ -170,12 +197,13 @@ namespace MarsQA_1.SpecflowPages.Pages
                 //Click on delete language
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i", 20000);
                 DeleteLangBtn.Click();
-               // CommonMethods.test.Log(LogStatus.Pass, "Language deleted successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Language Deleted Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "LanguageDeleted");
             }
             catch (Exception ex)
             {
-                Assert.Fail("Test failed to delete Language", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Language is not deleted successfully");
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", ex.Message);
+
             }
         }
 

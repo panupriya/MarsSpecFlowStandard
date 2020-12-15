@@ -116,11 +116,11 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Update Skill")]
-        public virtual void UpdateSkill()
+        [NUnit.Framework.DescriptionAttribute("Update Education")]
+        public virtual void UpdateEducation()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Skill", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Education", null, ((string[])(null)));
 #line 12
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -155,11 +155,11 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Delete Language")]
-        public virtual void DeleteLanguage()
+        [NUnit.Framework.DescriptionAttribute("Delete Education")]
+        public virtual void DeleteEducation()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Language", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Education", null, ((string[])(null)));
 #line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

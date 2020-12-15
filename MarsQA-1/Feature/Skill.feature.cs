@@ -155,11 +155,11 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Delete Language")]
-        public virtual void DeleteLanguage()
+        [NUnit.Framework.DescriptionAttribute("Delete Skill")]
+        public virtual void DeleteSkill()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Language", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Skill", null, ((string[])(null)));
 #line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

@@ -3,11 +3,14 @@ using MarsQA_1.SpecflowPages.Helpers;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using RelevantCodes.ExtentReports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using static MarsQA_1.Helpers.CommonMethods;
 
 namespace MarsQA_1.SpecflowPages.Pages
 {
@@ -54,6 +57,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Add skill level
             AddSkillLevel.Click();
             new SelectElement(AddSkillLevel).SelectByText(ExcelLibHelper.ReadData(2, "SkillLevel"));
+            Thread.Sleep(1000);
         }
 
         internal void AddSkills()
@@ -61,7 +65,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Click on add skill
             WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//input[@value='Add']", 10000);
             AddSkillBtn.Click();
-            //CommonMethods.test.Log(LogStatus.Info, "Added skill successfully");
+            CommonMethods.test.Log(LogStatus.Info, "Added skill successfully");
         }
 
         internal void VerifySkill()
@@ -72,6 +76,10 @@ namespace MarsQA_1.SpecflowPages.Pages
             Driver.driver.Navigate().Refresh();
             try
             {
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Add skill");
 
                 //Jump to Skill tab
 
@@ -88,12 +96,14 @@ namespace MarsQA_1.SpecflowPages.Pages
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
                 var lastRowSkillLevel = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
                 Assert.That(lastRowSkillLevel, Is.EqualTo(ExcelLibHelper.ReadData(2, "SkillLevel")));
-               //CommonMethods.test.Log(LogStatus.Pass, "Added skill verified successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Skill Added Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "SkillAdded");
             }
             catch (Exception ex)
             {
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
                 Assert.Fail("Test failed to verify Entering Skills", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Added skill is not verified successfully");
+                
             }
         }
         #endregion
@@ -124,6 +134,7 @@ namespace MarsQA_1.SpecflowPages.Pages
             WaitHelpers.WaitForElementVisibility(Driver.driver, "Name", "level", 10000);
             AddSkillLevel.Click();
             new SelectElement(AddSkillLevel).SelectByText(ExcelLibHelper.ReadData(3, "SkillLevel"));
+            Thread.Sleep(1000);
         }
 
         internal void UpodateSkills()
@@ -143,6 +154,10 @@ namespace MarsQA_1.SpecflowPages.Pages
             //Verify updated skill
             try
             {
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Edit skill");
 
                 //Jump to Skill tab
 
@@ -154,12 +169,14 @@ namespace MarsQA_1.SpecflowPages.Pages
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]", 10000);
                 var lastRowSkillLevel = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]")).Text;
                 Assert.That(lastRowSkillLevel, Is.EqualTo(ExcelLibHelper.ReadData(3, "SkillLevel")));
-                //CommonMethods.test.Log(LogStatus.Pass, "Skill edited verified successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Skill Updated Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "SkillUpdated");
             }
             catch (Exception ex)
             {
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
                 Assert.Fail("Test failed to verify updated Skills", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Skill edited is not verified successfully");
+                
             }
         }
         #endregion
@@ -173,6 +190,11 @@ namespace MarsQA_1.SpecflowPages.Pages
 
             try
             {
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Delete skill");
+
 
                 //Click on skill
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[2]", 10000);
@@ -185,13 +207,14 @@ namespace MarsQA_1.SpecflowPages.Pages
                 //Click on Delete skill
                 WaitHelpers.WaitForElementVisibility(Driver.driver, "XPath", "//div[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i", 20000);
                 DeleteSkillBtn.Click();
-                //CommonMethods.test.Log(LogStatus.Pass, "Skill deleted successfully");
+                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Skill deleted Successfully");
+                SaveScreenShotClass.SaveScreenshot(Driver.driver, "SkillDeleted");
 
             }
             catch (Exception ex)
             {
-                Assert.Fail("Test failed to Delete Skill", ex.Message);
-                //CommonMethods.test.Log(LogStatus.Fail, "Skill is deleted successfully");
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", ex.Message);
+
             }
         }
         #endregion

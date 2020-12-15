@@ -16,6 +16,6 @@ Scenario: Update Skill
 
 
 
-Scenario: Delete Language
+Scenario: Delete Skill
 	 Given  User should able to Delete Skill sucessfully
      
