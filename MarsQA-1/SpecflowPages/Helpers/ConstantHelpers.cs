@@ -22,5 +22,8 @@ namespace MarsQA_1.Helpers
 
         //ReportXML Path
         public static string ReportXMLPath = @"D:\ic test\MarsAdvanced\MarsSpecflowTask\MarsSpecFlow\MarsQA-1\TestReports\ReportXML.xml";
+
+        // SampleWorkPath
+        public static string SampleWorkPath = @"D:\ic test\MarsAdvanced\MarsSpecflowTask\MarsSpecFlow\MarsQA-1\SpecflowTests\SampleWork\Sample.txt";
     }
 }
