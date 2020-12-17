@@ -171,6 +171,8 @@
     <Compile Include="SpecflowPages\Pages\Description.cs" />
     <Compile Include="SpecflowPages\Pages\Education.cs" />
     <Compile Include="SpecflowPages\Pages\Language.cs" />
+    <Compile Include="SpecflowPages\Pages\ManageListing.cs" />
+    <Compile Include="SpecflowPages\Pages\ManageRequest.cs" />
     <Compile Include="SpecflowPages\Pages\ShareSkill.cs" />
     <Compile Include="SpecflowPages\Pages\SignIn.cs" />
     <Compile Include="SpecflowPages\Pages\Skill.cs" />
@@ -183,6 +185,8 @@
     <Compile Include="StepDefinition\DescriptionStep.cs" />
     <Compile Include="StepDefinition\EducationSteps.cs" />
     <Compile Include="StepDefinition\LanguageSteps.cs" />
+    <Compile Include="StepDefinition\ManageListingSteps.cs" />
+    <Compile Include="StepDefinition\ManageRequestSteps.cs" />
     <Compile Include="StepDefinition\SkillSteps.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +197,8 @@
     <None Include="Feature\Description.feature" />
     <None Include="Feature\Education.feature" />
     <None Include="Feature\Language.feature" />
+    <None Include="Feature\ManageListing.feature" />
+    <None Include="Feature\ManageRequest.feature" />
     <None Include="Feature\ShareSkillAdd.feature" />
     <None Include="Feature\Skill.feature" />
     <None Include="SpecflowTests\Data\Data.xlsx" />
