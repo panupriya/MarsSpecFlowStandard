@@ -4,7 +4,7 @@
 	I want to be view mark and delete notifications
 
 @Notification
-Scenario: Ntification 
+Scenario: Notification 
 	Given I go to notification tab
 	And I click on see all button
 	And I click on select all button
